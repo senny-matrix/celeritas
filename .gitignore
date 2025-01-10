@@ -1,3 +1,4 @@
 .ides
 coverage.out
-dist/*
+dist/*cache/testdata/tmp/badger/*.mem
+cache/testdata/tmp/badger/*.vlog
