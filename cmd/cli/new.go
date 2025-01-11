@@ -2,20 +2,22 @@ package main
 
 import (
 	"fmt"
-	"github.com/fatih/color"
-	"github.com/go-git/go-git/v5"
 	"io"
 	"log"
 	"os"
 	"os/exec"
 	"runtime"
 	"strings"
+
+	"github.com/fatih/color"
+	"github.com/go-git/go-git/v5"
 )
 
 var appURL string
+var appName string
 
-func doNew(appName string) {
-	appName = strings.ToLower(appName)
+func doNew(arg2 string) {
+	appName = strings.ToLower(arg2)
 	appURL = appName
 
 	// sanitize the application name (convert URL to a single word)
@@ -24,18 +26,19 @@ func doNew(appName string) {
 		appName = exploded[len(exploded)-1]
 	}
 
-	log.Println("App Name is: ", appName)
+	log.Println(" --- App Name is: ", appName, " --- ")
+
 	// git clone the skeleton application
 	color.Green("\tCloning the skeleton application ...")
 	_, err := git.PlainClone("./"+appName, false, &git.CloneOptions{
-		URL:      "https://github.com/senny-matrix/celeritas-app.git",
+		URL:      "git@github.com:senny-matrix/celeritas-app.git",
 		Progress: os.Stdout,
 		Depth:    1,
 	})
-
 	if err != nil {
 		exitGracefully(err)
 	}
+
 	// remove .git directory
 	//err = os.RemoveAll("./" + appName + "/.git")
 	err = os.RemoveAll(fmt.Sprintf("./%s/.git", appName))
@@ -130,7 +133,11 @@ func doNew(appName string) {
 	}
 
 	color.Green("\tApplication (%s) created successfully!", appURL)
-	color.Green("\tcd %s", appURL)
+
+	fmt.Println("")
+
+	color.Green("\tTo run the application, do the following:")
+	color.Green("\tcd %s", appName)
 	color.Green("\tmake run")
 
 	// open the browser

@@ -2,9 +2,10 @@ package main
 
 import (
 	"errors"
+	"os"
+
 	"github.com/fatih/color"
 	"github.com/senny-matrix/celeritas"
-	"os"
 )
 
 const version = "1.0.0"
@@ -19,14 +20,17 @@ func main() {
 	}
 
 	setup(arg1, arg2)
+
 	switch arg1 {
 	case "help":
 		showHelp()
+
 	case "new":
 		if arg2 == "" {
 			exitGracefully(errors.New("new requires a project name"))
 		}
 		doNew(arg2)
+
 	case "migrate":
 		if arg2 == "" {
 			arg2 = "up"
@@ -37,8 +41,10 @@ func main() {
 			exitGracefully(err, "Error: failed to migrate")
 		}
 		message = "Migration complete"
+
 	case "version":
 		color.Green("Application  Version: %v", version)
+
 	case "make":
 		if arg2 == "" {
 			exitGracefully(errors.New("make requires a subcommand: (migration | model | handler)"))
@@ -48,6 +54,7 @@ func main() {
 		if err != nil {
 			exitGracefully(err)
 		}
+
 	default:
 		showHelp()
 	}

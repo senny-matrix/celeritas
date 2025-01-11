@@ -2,11 +2,12 @@ package main
 
 import (
 	"fmt"
-	"github.com/fatih/color"
-	"github.com/joho/godotenv"
 	"os"
 	"path/filepath"
 	"strings"
+
+	"github.com/fatih/color"
+	"github.com/joho/godotenv"
 )
 
 func setup(arg1, arg2 string) {
@@ -64,13 +65,13 @@ func getDSN() string {
 
 func showHelp() {
 	color.Yellow(`Available commands:
- 
+
 help- show this help
 version                 - print application version
 migrate                 - run all up migrations that have not been run previously
-migrate down            - reverse the most recent migration 
-migrate reset           - reset the database to the initial state 
-make migration <name>   - create two new (up and down) migration files in the migrations folder 
+migrate down            - reverse the most recent migration
+migrate reset           - reset the database to the initial state
+make migration <name>   - create two new (up and down) migration files in the migrations folder
 make auth               - create and runs migrations for auth tables and creates models and middleware for the application
 make handler <name>     - create a new stub handler file in the handlers folder
 make model <name>       - create a new stub model file in the data folder
@@ -104,7 +105,7 @@ func updateSourceFiles(path string, fi os.FileInfo, err error) error {
 			exitGracefully(err)
 		}
 
-		newContents := strings.Replace(string(read), "myapp", appURL, -1)
+		newContents := strings.Replace(string(read), "myapp", appName, -1)
 
 		// write the changed file
 		err = os.WriteFile(path, []byte(newContents), 0)
