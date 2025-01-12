@@ -4,3 +4,4 @@ dist/*cache/testdata/tmp/badger/*.mem
 cache/testdata/tmp/badger/*.vlog
 cache/testdata/tmp/badger/00001.mem
 cache/testdata/tmp/badger/000001.vlog
+dist/celeritas

@@ -31,7 +31,8 @@ func doNew(arg2 string) {
 	// git clone the skeleton application
 	color.Green("\tCloning the skeleton application ...")
 	_, err := git.PlainClone("./"+appName, false, &git.CloneOptions{
-		URL:      "git@github.com:senny-matrix/celeritas-app.git",
+		// URL:      "git@github.com:senny-matrix/celeritas-app.git",
+		URL:      "https://github.com/senny-matrix/celeritas-app.git",
 		Progress: os.Stdout,
 		Depth:    1,
 	})
